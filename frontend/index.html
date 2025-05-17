@@ -10,8 +10,8 @@
 </head>
 
 <body>
-<div class="container mx-auto p-25">
-    <div id="difficulty" class="flex flex-row justify-center space-x-4">
+    <div class="container mx-auto p-25">
+        <div id="difficulty" class="flex flex-row justify-center space-x-4 mb-20">
             <button
                 class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
                 Easy
@@ -24,9 +24,38 @@
                 class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
                 Hard
             </button>
-    </div>
-</div c>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        </div>
+        <div id="cards" class="flex flex-col items-center">
+            <div class="flex">
+                <div class="card flex-1">
+                    <img class="cardFront cursor-pointer" src="images/pokeball.png" />
+                    <img class="cardBack" src="" />
+                </div>
+                <div class="card flex-1">
+                    <img class="cardFront cursor-pointer" src="images/pokeball.png" />
+                    <img class="cardBack" src="" />
+                </div>
+                <div class="card flex-1">
+                    <img class="cardFront cursor-pointer" src="images/pokeball.png" />
+                    <img class="cardBack" src="" />
+                </div>
+            </div>
+            <div class="flex">
+                <div class="card flex-1">
+                    <img class="cardFront cursor-pointer" src="images/pokeball.png" />
+                    <img class="cardBack" src="" />
+                </div>
+                <div class="card flex-1">
+                    <img class="cardFront cursor-pointer" src="images/pokeball.png" />
+                    <img class="cardBack" src="" />
+                </div>
+                <div class="card flex-1">
+                    <img class="cardFront cursor-pointer" src="images/pokeball.png" />
+                    <img class="cardBack" src="" />
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 
 </html>
