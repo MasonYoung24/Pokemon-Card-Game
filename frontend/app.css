@@ -1,10 +1,17 @@
 .card:hover {
-    /* transform: rotateY(180deg) trans; */
     animation-name: flipCard;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
 }
+
+.singleCardContainer {
+    perspective: 1000px;
+}
+.card {
+    transform-style: preserve-3d;
+}
+
 
 @keyframes flipCard {
     0% {
