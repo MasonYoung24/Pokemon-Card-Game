@@ -14,12 +14,16 @@ function getRandomElement(arr) {
 }
 
 async function addImagesToCardBacks() {
-    let randomPokemon = getRandomElement(allPokemon);
-    let response = await axios.get(randomPokemon.url);
-    let cardBacks = document.querySelectorAll(".cardBack");
-    cardBacks.forEach(card => {
-        card.src = response.data.sprites.other["official-artwork"].front_default
-    });
+    let cardBacks = Array.from(document.querySelectorAll(".cardBack"));
+    // shuffle the cardBacks
+    cardBacks.sort(() => Math.random() - 0.5);
+    let numberOfCards = cardBacks.length;
+    for (let i = 0; i < numberOfCards; i += 2) {
+        let randomPokemon = getRandomElement(allPokemon);
+        let response = await axios.get(randomPokemon.url);
+        cardBacks[i].src = response.data.sprites.other["official-artwork"].front_default
+        cardBacks[i + 1].src = response.data.sprites.other["official-artwork"].front_default
+    }
 }
 
 // hide the card faces on flip
@@ -29,7 +33,8 @@ async function hideCardFace() {
         card.addEventListener("animationend", function () {
             const cardFront = this.querySelector(".cardFront");
             const cardBack = this.querySelector(".cardBack");
-            if (cardFront.style.display = "none") {
+            if (cardFront.style.display != "none") {
+                cardFront.style.display = "none"
                 cardBack.style.display = "block"
             } else {
                 cardFront.style.display = "block";
