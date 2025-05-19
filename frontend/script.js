@@ -25,9 +25,24 @@ async function addImagesToCardBacks() {
     });
 }
 
+// hide the card faces on flip
+async function hideCardFace() {
+    let cards = document.querySelectorAll(".card");
+    let flipCounter = 0;
+    cards.forEach(card => {
+        card.addEventListener("animationend", () => {
+            if (flipCounter < 2) {
+                card.style.visibility = "hidden";
+                flipCounter++;
+            } 
+        })
+    });
+};
+
 async function init() {
     await fetchPokemon();
     await addImagesToCardBacks();
+    await hideCardFace()
 }
 
 init();
