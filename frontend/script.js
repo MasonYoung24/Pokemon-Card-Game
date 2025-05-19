@@ -15,10 +15,7 @@ function getRandomElement(arr) {
 
 async function addImagesToCardBacks() {
     let randomPokemon = getRandomElement(allPokemon);
-    console.log(randomPokemon);
     let response = await axios.get(randomPokemon.url);
-    console.log(response)
-
     let cardBacks = document.querySelectorAll(".cardBack");
     cardBacks.forEach(card => {
         card.src = response.data.sprites.other["official-artwork"].front_default
@@ -28,16 +25,21 @@ async function addImagesToCardBacks() {
 // hide the card faces on flip
 async function hideCardFace() {
     let cards = document.querySelectorAll(".card");
-    let flipCounter = 0;
     cards.forEach(card => {
-        card.addEventListener("animationend", () => {
-            if (flipCounter < 2) {
-                card.style.visibility = "hidden";
-                flipCounter++;
-            } 
+        card.addEventListener("animationend", function () {
+            const cardFront = this.querySelector(".cardFront");
+            const cardBack = this.querySelector(".cardBack");
+            if (cardFront.style.display = "none") {
+                cardBack.style.display = "block"
+            } else {
+                cardFront.style.display = "block";
+                cardBack.style.display = "none";
+            }
         })
     });
 };
+
+
 
 async function init() {
     await fetchPokemon();
