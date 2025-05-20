@@ -3,13 +3,34 @@
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 .singleCardContainer {
     perspective: 1000px;
 }
+
 .card {
     transform-style: preserve-3d;
+    position: relative;
+    width: 20vw;
+    height: 20vw;
+}
+
+.cardBack {
+    transform: rotateY(180deg);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.cardFront {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    backface-visibility: hidden;
 }
 
 
