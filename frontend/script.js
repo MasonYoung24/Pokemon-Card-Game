@@ -52,28 +52,10 @@ async function compareFlippedPokemon() {
     })
 }
 
-// hide the card faces on flip
-async function hideCardFace() {
-    let cards = document.querySelectorAll(".card");
-    cards.forEach(card => {
-        card.addEventListener("animationend", function () {
-            const cardFront = this.querySelector(".cardFront");
-            const cardBack = this.querySelector(".cardBack");
-            if (cardFront.style.display != "none") {
-                cardFront.style.display = "none"
-                cardBack.style.display = "block"
-            } else {
-                cardFront.style.display = "block";
-                cardBack.style.display = "none";
-            }
-        })
-    });
-};
 
 async function init() {
     await fetchPokemon();
     await addImagesToCardBacks();
-    await hideCardFace()
     await compareFlippedPokemon();
 }
 
