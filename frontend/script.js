@@ -1,4 +1,6 @@
 let allPokemon = [];
+let flippedPokemon;
+
 async function fetchPokemon() {
     try {
         const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=10000");
@@ -26,6 +28,30 @@ async function addImagesToCardBacks() {
     }
 }
 
+async function compareFlippedPokemon() {
+    let cards = document.querySelectorAll(".card");
+    let flipCount = 0;
+    cards.forEach(card => {
+        card.addEventListener("click", function () {
+            this.classList.add("flipped");
+            let cardBack = this.getElementsByClassName("cardBack")[0];
+            if (cardBack.style.display != "block") {
+                if (flippedPokemon === undefined) {
+                    flippedPokemon = cardBack.src
+                } else if (flippedPokemon === cardBack.src) {
+                    console.log("the cards match!");
+                    flippedPokemon = undefined;
+                } else {
+                    console.log("the cards do not match. Try again!")
+                    flippedPokemon = undefined;
+                }
+            } else {
+
+            }
+        })
+    })
+}
+
 // hide the card faces on flip
 async function hideCardFace() {
     let cards = document.querySelectorAll(".card");
@@ -44,12 +70,11 @@ async function hideCardFace() {
     });
 };
 
-
-
 async function init() {
     await fetchPokemon();
     await addImagesToCardBacks();
     await hideCardFace()
+    await compareFlippedPokemon();
 }
 
 init();
