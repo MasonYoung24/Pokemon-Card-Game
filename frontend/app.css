@@ -10,11 +10,23 @@
     perspective: 1000px;
 }
 
+#card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+    height: 400px;
+    margin: auto;
+    border: 1px;
+}
+
+img {
+    width: 100%
+}
+
 .card {
     transform-style: preserve-3d;
     position: relative;
-    width: 20vw;
-    height: 20vw;
+    flex-basis: 33.3%;
 }
 
 .cardBack {
@@ -23,6 +35,8 @@
     height: 100%;
     position: absolute;
     backface-visibility: hidden;
+    top: 0px;
+    left: 0px
 }
 
 .cardFront {
