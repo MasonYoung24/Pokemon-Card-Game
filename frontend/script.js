@@ -36,7 +36,7 @@ let locked = false;
 // Flip the card on click
 const cards = document.querySelectorAll(".card")
 
-const onCardClick = function (e) {
+const onCardClick = async function (e) {
     if (locked) {
         return;
     }
@@ -55,34 +55,31 @@ const onCardClick = function (e) {
     if (firstCardImg && secondCardImg) {
         locked = true;
         console.log("locked");
-        if (firstCardImg.src == secondCardImg.src) {
-            setTimeout((arg) => {
-                console.log("match");
-                firstCardImg.parentNode.removeEventListener("click", onCardClick);
-                secondCardImg.parentNode.removeEventListener("click", onCardClick);
-                // reset images
-                firstCardImg = undefined;
-                secondCardImg = undefined;
-                locked = false;
-                console.log("unlocked")
-            }, 500)
-        } else {
-            console.log("no match");
-            // flip the cards back
-            setTimeout((arg) => {
-                firstCardImg.parentNode.classList.toggle("flip");
-                secondCardImg.parentNode.classList.toggle("flip");
-                firstCardImg.classList.remove("first");
-                // reset images
-                firstCardImg = undefined;
-                secondCardImg = undefined;
-                locked = false;
-                console.log("unlocked")
-            }, 1000)
-        }
+        await new Promise((resolve, reject) => {
+            if (firstCardImg.src == secondCardImg.src) {
+                setTimeout((arg) => {
+                    console.log("match");
+                    firstCardImg.parentNode.removeEventListener("click", onCardClick);
+                    secondCardImg.parentNode.removeEventListener("click", onCardClick);
+                    resolve();
+                }, 500)
+            } else {
+                console.log("no match");
+                // flip the cards back
+                setTimeout((arg) => {
+                    firstCardImg.parentNode.classList.toggle("flip");
+                    secondCardImg.parentNode.classList.toggle("flip");
+                    firstCardImg.classList.remove("first");
+                    resolve();
+                }, 1000)
+            }
+        })
+        firstCardImg = undefined;
+        secondCardImg = undefined;
+        locked = false;
+        console.log("unlocked")
     }
 }
-
 cards.forEach((arg) => {
     arg.addEventListener("click", onCardClick)
 })
