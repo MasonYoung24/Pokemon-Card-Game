@@ -5,6 +5,12 @@ let totalPairs = numberOfCards / 2;
 let pairsMatched = 0;
 let pairsRemaining = totalPairs - pairsMatched;
 let numberOfClicks = 0;
+// Timer variables
+let milliseconds = 0;
+let seconds = 0;
+let minutes = 0
+let hours = 0;
+let timeDiv = document.getElementById("time");
 
 // Populate pairs remaining on start
 document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
@@ -104,6 +110,31 @@ cards.forEach((arg) => {
 
 // Add total number of pairs to the header
 document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
+
+document.getElementById("startButton").addEventListener("click", (e) => {
+    setInterval((arg) => {
+        milliseconds += 1000 / 100;
+
+        handleTime(milliseconds);
+    }, 1000)
+})
+
+function handleTime(milliseconds) {
+    let timeDiv = document.getElementById("time");
+    if (milliseconds == 10) {
+        milliseconds = 0;
+        seconds++;
+    }
+    if (seconds == 60) {
+        seconds = 0;
+        minutes++;
+    }
+    if (minutes == 60) {
+        minutes = 0;
+        hours++;
+    }
+    timeDiv.innerText = `${hours}${minutes}:${seconds}${milliseconds}`
+}
 
 async function init() {
     await fetchPokemon();
