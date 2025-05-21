@@ -13,8 +13,8 @@
 <body>
     <header>
         <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-            <div class="flex flex-wrap justify-center items-center mx-auto max-w-screen-xl">
-                <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+            <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                <div class="flex flex-row">
                     <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                         <li>
                             <p id="numberOfClicks"
@@ -37,6 +37,15 @@
                                 Total Pairs: </p>
                         </li>
                     </ul>
+                </div>
+                <div id="timer" class="flex flex-row space-x-1">
+                    <button id="startButton" ;
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Start</button>
+                    <div id="time" class="bg-white py-2 px-4 border rounded">00:00:00</div>
+                    <button id="pauseButton" ;
+                        class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Pause</button>
+                    <button id="endButton" ;
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Restart</button>
                 </div>
             </div>
         </nav>
