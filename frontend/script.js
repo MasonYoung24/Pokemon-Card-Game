@@ -37,11 +37,15 @@ const cards = document.querySelectorAll(".card")
 const onCardClick = function (e) {
     if (!firstCardImg) {
         firstCardImg = this.querySelector(".cardFront");
+        firstCardImg.classList.add("first");
         console.log(firstCardImg)
+        this.classList.toggle("flip")
     } else {
-        secondCardImg = this.querySelector(".cardFront");
+        if (!this.querySelector(".cardFront").classList.contains("first")) {
+            secondCardImg = this.querySelector(".cardFront");
+            this.classList.toggle("flip")
+        }
     }
-    this.classList.toggle("flip")
     if (firstCardImg && secondCardImg) {
         if (firstCardImg.src == secondCardImg.src) {
             console.log("match");
