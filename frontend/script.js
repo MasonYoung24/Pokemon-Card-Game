@@ -1,6 +1,12 @@
 let allPokemon = [];
 let flippedPokemon;
 let numberOfCards = Array.from(document.querySelectorAll(".card")).length;
+let totalPairs = numberOfCards / 2;
+let pairsMatched = 0;
+let pairsRemaining = totalPairs - pairsMatched;
+
+// Populate pairs remaining on start
+document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
 
 async function fetchPokemon() {
     try {
@@ -33,7 +39,6 @@ let secondCardImg = undefined;
 
 let locked = false;
 
-let pairsMatched = 0;
 
 // Flip the card on click
 const cards = document.querySelectorAll(".card")
@@ -63,6 +68,10 @@ const onCardClick = async function (e) {
                     console.log("match");
                     pairsMatched++;
                     document.getElementById("pairsMatched").innerText = `Pairs Matched: ${pairsMatched}`
+                    // Add number of remaining pairs to the header
+                    pairsRemaining = totalPairs - pairsMatched;
+                    // Update pairs remaining
+                    document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
                     firstCardImg.parentNode.removeEventListener("click", onCardClick);
                     secondCardImg.parentNode.removeEventListener("click", onCardClick);
                     resolve();
@@ -89,8 +98,7 @@ cards.forEach((arg) => {
 })
 
 // Add total number of pairs to the header
-// shuffle the cardBacks
-document.getElementById("pairsTotal").innerText = `Total Pairs: ${numberOfCards}`;
+document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
 
 async function init() {
     await fetchPokemon();
