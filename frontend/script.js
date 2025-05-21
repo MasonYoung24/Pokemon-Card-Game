@@ -28,50 +28,49 @@ async function addImagesToCardFronts() {
     }
 }
 
+let firstCardImg = undefined;
+let secondCardImg = undefined;
+
+// Flip the card on click
 const cards = document.querySelectorAll(".card")
+
+const onCardClick = function (e) {
+    if (!firstCardImg) {
+        firstCardImg = this.querySelector(".cardFront");
+        console.log(firstCardImg)
+    } else {
+        secondCardImg = this.querySelector(".cardFront");
+    }
+    this.classList.toggle("flip")
+    if (firstCardImg && secondCardImg) {
+        if (firstCardImg.src == secondCardImg.src) {
+            console.log("match");
+            firstCardImg.parentNode.removeEventListener("click", onCardClick);
+            secondCardImg.parentNode.removeEventListener("click", onCardClick);
+            // reset images
+            firstCardImg = undefined;
+            secondCardImg = undefined;
+        } else {
+            console.log("no match");
+            // flip the cards back
+            setTimeout((arg) => {
+                firstCardImg.parentNode.classList.toggle("flip");
+                secondCardImg.parentNode.classList.toggle("flip");
+                // reset images
+                firstCardImg = undefined;
+                secondCardImg = undefined;
+            }, 1000)
+        }
+    }
+}
+
 cards.forEach((arg) => {
-    arg.addEventListener("click", function (e) {
-        this.classList.toggle("flip")
-    })
+    arg.addEventListener("click", onCardClick)
 })
-
-// async function compareFlippedPokemon() {
-//     let cards = document.querySelectorAll(".card");
-//     let flipCount = 1;
-//     cards.forEach(card => {
-//         card.addEventListener("click", function () {
-//             // Keep track of which cards were flipped and trigger animation
-//             this.classList.add("flipped");
-//             let cardBack = this.getElementsByClassName("cardBack")[0];
-//             if (cardBack.style.display != "block") {
-//                 if (flippedPokemon === undefined) {
-//                     flippedPokemon = cardBack.src
-//                 } else if (flippedPokemon === cardBack.src) {
-//                     console.log("the cards match!");
-//                     flippedPokemon = undefined;
-//                 } else {
-//                     console.log("the cards do not match. Try again!")
-//                     flippedPokemon = undefined;
-//                     // flip the cards back
-//                     setTimeout(() => {
-//                         let flippedCards = document.getElementsByClassName("flipped")
-//                         Array.from(flippedCards).forEach(card => {
-//                             card.classList.remove("flipped");
-//                         })
-//                     }, 2000)
-//                 }
-//             } else {
-
-//             }
-//         })
-//     })
-// }
-
 
 async function init() {
     await fetchPokemon();
     await addImagesToCardFronts();
-    // await compareFlippedPokemon();
 }
 
 init();
