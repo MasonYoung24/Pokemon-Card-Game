@@ -33,6 +33,8 @@ let secondCardImg = undefined;
 
 let locked = false;
 
+let pairsMatched = 0;
+
 // Flip the card on click
 const cards = document.querySelectorAll(".card")
 
@@ -59,6 +61,8 @@ const onCardClick = async function (e) {
             if (firstCardImg.src == secondCardImg.src) {
                 setTimeout((arg) => {
                     console.log("match");
+                    pairsMatched++;
+                    document.getElementById("pairsMatched").innerText = `Pairs Matched: ${pairsMatched}`
                     firstCardImg.parentNode.removeEventListener("click", onCardClick);
                     secondCardImg.parentNode.removeEventListener("click", onCardClick);
                     resolve();
