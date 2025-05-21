@@ -4,6 +4,7 @@ let numberOfCards = Array.from(document.querySelectorAll(".card")).length;
 let totalPairs = numberOfCards / 2;
 let pairsMatched = 0;
 let pairsRemaining = totalPairs - pairsMatched;
+let numberOfClicks = 0;
 
 // Populate pairs remaining on start
 document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
@@ -53,10 +54,14 @@ const onCardClick = async function (e) {
         firstCardImg.classList.add("first");
         console.log(firstCardImg)
         this.classList.toggle("flip")
+        numberOfClicks++;
+        document.getElementById("numberOfClicks").innerText = `Number of Clicks: ${numberOfClicks}`
     } else {
         if (!this.querySelector(".cardFront").classList.contains("first")) {
             secondCardImg = this.querySelector(".cardFront");
             this.classList.toggle("flip")
+            numberOfClicks++;
+            document.getElementById("numberOfClicks").innerText = `Number of Clicks: ${numberOfClicks}`
         }
     }
     if (firstCardImg && secondCardImg) {
