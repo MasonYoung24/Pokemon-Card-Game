@@ -1,5 +1,6 @@
 let allPokemon = [];
 let flippedPokemon;
+let numberOfCards = Array.from(document.querySelectorAll(".card")).length;
 
 async function fetchPokemon() {
     try {
@@ -19,7 +20,6 @@ async function addImagesToCardFronts() {
     let cardFronts = Array.from(document.querySelectorAll(".cardFront"));
     // shuffle the cardBacks
     cardFronts.sort(() => Math.random() - 0.5);
-    let numberOfCards = cardFronts.length;
     for (let i = 0; i < numberOfCards; i += 2) {
         let randomPokemon = getRandomElement(allPokemon);
         let response = await axios.get(randomPokemon.url);
@@ -87,6 +87,10 @@ const onCardClick = async function (e) {
 cards.forEach((arg) => {
     arg.addEventListener("click", onCardClick)
 })
+
+// Add total number of pairs to the header
+// shuffle the cardBacks
+document.getElementById("pairsTotal").innerText = `Total Pairs: ${numberOfCards}`;
 
 async function init() {
     await fetchPokemon();
