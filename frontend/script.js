@@ -31,10 +31,16 @@ async function addImagesToCardFronts() {
 let firstCardImg = undefined;
 let secondCardImg = undefined;
 
+let locked = false;
+
 // Flip the card on click
 const cards = document.querySelectorAll(".card")
 
 const onCardClick = function (e) {
+    if (locked) {
+        return;
+    }
+
     if (!firstCardImg) {
         firstCardImg = this.querySelector(".cardFront");
         firstCardImg.classList.add("first");
@@ -47,22 +53,31 @@ const onCardClick = function (e) {
         }
     }
     if (firstCardImg && secondCardImg) {
+        locked = true;
+        console.log("locked");
         if (firstCardImg.src == secondCardImg.src) {
-            console.log("match");
-            firstCardImg.parentNode.removeEventListener("click", onCardClick);
-            secondCardImg.parentNode.removeEventListener("click", onCardClick);
-            // reset images
-            firstCardImg = undefined;
-            secondCardImg = undefined;
+            setTimeout((arg) => {
+                console.log("match");
+                firstCardImg.parentNode.removeEventListener("click", onCardClick);
+                secondCardImg.parentNode.removeEventListener("click", onCardClick);
+                // reset images
+                firstCardImg = undefined;
+                secondCardImg = undefined;
+                locked = false;
+                console.log("unlocked")
+            }, 500)
         } else {
             console.log("no match");
             // flip the cards back
             setTimeout((arg) => {
                 firstCardImg.parentNode.classList.toggle("flip");
                 secondCardImg.parentNode.classList.toggle("flip");
+                firstCardImg.classList.remove("first");
                 // reset images
                 firstCardImg = undefined;
                 secondCardImg = undefined;
+                locked = false;
+                console.log("unlocked")
             }, 1000)
         }
     }
