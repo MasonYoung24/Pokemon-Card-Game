@@ -13,34 +13,36 @@
 
 <body>
     <header>
-        <nav class="bg-white text-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 mb-5 md:mb-20">
-            <div class="flex-row flex justify-center items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+        <nav class="bg-white text-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 mb-5 md:mb-15">
+            <div class="flex-row flex justify-center items-center w-full lg:flex lg:w-auto lg:order-1"
+                id="mobile-menu-2">
                 <div class="">
-                    <ul class="grid grid-cols-2 justify-center items-center mx-auto mt-4 font-medium lg:flex lg:flex-row lg:space-x-8 lg:mt-0">
+                    <ul
+                        class="grid grid-cols-2 justify-center items-center mx-auto mt-4 font-medium lg:flex lg:flex-row lg:space-x-8 lg:mt-0">
                         <li>
-                            <p id="numberOfClicks"
-                                class="block py-2 pr-4 pl-3 ">
+                            <p id="numberOfClicks" class="block py-2 pr-4 pl-3 ">
                                 Number of Clicks: 0</p>
                         </li>
                         <li>
-                            <p id="pairsRemaining"
-                                class="block py-2 pr-4 pl-3 ">
+                            <p id="pairsRemaining" class="block py-2 pr-4 pl-3 ">
                                 Pairs Remaining: </p>
                         </li>
                         <li>
-                            <p id="pairsMatched"
-                                class="block py-2 pr-4 pl-3 ">
+                            <p id="pairsMatched" class="block py-2 pr-4 pl-3 ">
                                 Pairs Matched: 0</p>
                         </li>
                         <li>
-                            <p id="pairsTotal"
-                                class="block py-2 pr-4 pl-3">
+                            <p id="pairsTotal" class="block py-2 pr-4 pl-3">
                                 Total Pairs: </p>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <div id="themeContainer" class="flex flex-row justify-center space-x-4 mb-5">
+            <button type="button" id="dark" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">Dark</button>
+            <button id="light" type="button" class="bg-white text-gray-800 border border-gray-300 px-4 py-2 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 transition duration-200">Light</button>
+        </div>
         <div id="difficulty" class="flex flex-row justify-center space-x-4">
             <button id="easy"
                 class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
@@ -61,7 +63,9 @@
             <button id="restartButton" ;
                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded border-gray-400 border shadow">Restart</button>
         </div>
-        <div id="time" class="bg-none py-2 px-4 text-6xl mx-auto flex justify-center md:mb-10"><p>00:00:00</p></div>
+        <div id="time" class="bg-none py-2 px-4 text-6xl mx-auto flex justify-center md:mb-10">
+            <p>00:00:00</p>
+        </div>
     </header>
 
     <div id="win">
