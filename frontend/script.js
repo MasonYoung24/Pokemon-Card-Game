@@ -176,6 +176,20 @@ darkButton.addEventListener("click", () => {
     localStorage.setItem("theme", "dark");
 })
 
+async function activeSavedTheme() {
+    let theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+        cardGridEasy.style.backgroundColor = "black";
+        cardGridMedium.style.backgroundColor = "black";
+        cardGridHard.style.backgroundColor = "black";
+    } else {
+        cardGridEasy.style.backgroundColor = "white";
+        cardGridMedium.style.backgroundColor = "white";
+        cardGridHard.style.backgroundColor = "white";
+    }
+}
+activeSavedTheme();
+
 function playWinningAnimation() {
     let winAnimationElement = document.getElementById("win");
     let winMessageContainer = document.getElementById("winMessageContainer");
