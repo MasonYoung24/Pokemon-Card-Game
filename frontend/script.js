@@ -11,6 +11,8 @@ let seconds = 0;
 let minutes = 0
 let hours = 0;
 let timeDiv = document.getElementById("time");
+let pauseButton = document.getElementById("pauseButton");
+let pause = pauseButton.classList.contains("on");
 
 // Populate pairs remaining on start
 document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
@@ -111,17 +113,24 @@ cards.forEach((arg) => {
 // Add total number of pairs to the header
 document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
 
+// Start or resume timer on click of start button
+let timer = null;
 document.getElementById("startButton").addEventListener("click", (e) => {
-    setInterval((arg) => {
-        milliseconds += 1000 / 100;
-
-        handleTime(milliseconds);
+    if (timer !== null) return; // prevent simultaneous events
+    pauseButton.classList.remove("on")
+    timer = setInterval(() => {
+        const isPaused = pauseButton.classList.contains("on");
+        console.log(isPaused)
+        if (!isPaused) {
+            milliseconds += 1000 / 100;
+            handleTime(milliseconds);
+        }
     }, 1000)
 })
 
 function handleTime(milliseconds) {
     let timeDiv = document.getElementById("time");
-    if (milliseconds == 10) {
+    if (milliseconds == 1000) {
         milliseconds = 0;
         seconds++;
     }
@@ -135,6 +144,14 @@ function handleTime(milliseconds) {
     }
     timeDiv.innerText = `${hours}${minutes}:${seconds}${milliseconds}`
 }
+
+async function pauseTimer() {
+    pauseButton.addEventListener("click", () => {
+        pauseButton.classList.add("on");
+    })
+}
+
+pauseTimer();
 
 async function init() {
     await fetchPokemon();
