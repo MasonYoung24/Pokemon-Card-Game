@@ -40,8 +40,10 @@
             </div>
         </nav>
         <div id="themeContainer" class="flex flex-row justify-center space-x-4 mb-5">
-            <button type="button" id="dark" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">Dark</button>
-            <button id="light" type="button" class="bg-white text-gray-800 border border-gray-300 px-4 py-2 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 transition duration-200">Light</button>
+            <button type="button" id="dark"
+                class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">Dark</button>
+            <button id="light" type="button"
+                class="bg-white text-gray-800 border border-gray-300 px-4 py-2 rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 transition duration-200">Light</button>
         </div>
         <div id="difficulty" class="flex flex-row justify-center space-x-4">
             <button id="easy"
@@ -63,8 +65,9 @@
             <button id="restartButton" ;
                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded border-gray-400 border shadow">Restart</button>
         </div>
-        <div id="time" class="bg-none py-2 px-4 text-6xl mx-auto flex justify-center md:mb-10">
-            <p>00:00:00</p>
+        <div class="bg-none py-2 px-4 text-2xl md:text-6xl mx-auto flex flex-col items-center justify-center md:mb-10">
+            <p id="timeMessage" class="mb-2"></p>
+            <p id="time">00:00:00</p>
         </div>
     </header>
 
