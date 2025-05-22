@@ -11,6 +11,7 @@ let seconds = 0;
 let minutes = 0
 let hours = 0;
 let timeDiv = document.getElementById("time");
+let gameActive = false;
 
 // Populate pairs remaining on start
 document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
@@ -120,6 +121,10 @@ document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
 let timer = null;
 document.getElementById("startButton").addEventListener("click", (e) => {
     if (timer !== null) return; // prevent simultaneous events
+    gameActive = true;
+    document.getElementById("easy").disabled = true;
+    document.getElementById("medium").disabled = true;
+    document.getElementById("hard").disabled = true;
     timer = setInterval(() => {
         milliseconds += 1000 / 100;
         handleTime(milliseconds);
@@ -177,6 +182,11 @@ async function resetGame() {
         cardGridEasy.style.display = "none";
         cardGridHard.style.display = "none";
         cardGridMedium.style.display = "none"
+
+        // Reactivate the difficulty buttons
+        document.getElementById("easy").disabled = false;
+        document.getElementById("medium").disabled = false;
+        document.getElementById("hard").disabled = false;
     })}
 resetGame(timer);
 
