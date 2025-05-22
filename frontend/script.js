@@ -11,8 +11,6 @@ let seconds = 0;
 let minutes = 0
 let hours = 0;
 let timeDiv = document.getElementById("time");
-let pauseButton = document.getElementById("pauseButton");
-let pause = pauseButton.classList.contains("on");
 
 // Populate pairs remaining on start
 document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
@@ -122,14 +120,9 @@ document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
 let timer = null;
 document.getElementById("startButton").addEventListener("click", (e) => {
     if (timer !== null) return; // prevent simultaneous events
-    pauseButton.classList.remove("on")
     timer = setInterval(() => {
-        const isPaused = pauseButton.classList.contains("on");
-        console.log(isPaused)
-        if (!isPaused) {
-            milliseconds += 1000 / 100;
-            handleTime(milliseconds);
-        }
+        milliseconds += 1000 / 100;
+        handleTime(milliseconds);
     }, 1000)
 })
 
@@ -168,13 +161,6 @@ function handleTime(milliseconds) {
     timeDiv.innerText = `${hours}${minutes}:${seconds}${milliseconds}`
 }
 
-async function pauseTimer() {
-    pauseButton.addEventListener("click", () => {
-        pauseButton.classList.add("on");
-    })
-}
-pauseTimer();
-
 async function restartTimer() {
     let restartButton = document.getElementById("restartButton");
     restartButton.addEventListener("click", () => {
@@ -191,7 +177,7 @@ async function activatePowerUp() {
     if (Math.random() < 0.3) {
         alert("Power Up!! Catch 'em all!!");
         let cards = document.querySelectorAll(".card");
-        cards.forEach((card)=>{
+        cards.forEach((card) => {
             card.classList.toggle("flip");
             setTimeout(() => {
                 card.classList.toggle("flip");
