@@ -99,6 +99,8 @@ const onCardClick = async function (e) {
                     firstCardImg.parentNode.classList.toggle("flip");
                     secondCardImg.parentNode.classList.toggle("flip");
                     firstCardImg.classList.remove("first");
+                    // Chance to activate powerup on incorrect match
+                    activatePowerUp();
                     resolve();
                 }, 1000)
             }
@@ -183,6 +185,20 @@ async function restartTimer() {
     })
 }
 restartTimer(timer);
+
+// reveal all cards for a short time
+async function activatePowerUp() {
+    if (Math.random() < 0.3) {
+        alert("Power Up!! Catch 'em all!!");
+        let cards = document.querySelectorAll(".card");
+        cards.forEach((card)=>{
+            card.classList.toggle("flip");
+            setTimeout(() => {
+                card.classList.toggle("flip");
+            }, 1500)
+        })
+    }
+}
 
 async function handleGameDifficulty() {
     let easyDifficultyBtn = document.getElementById("easy");
