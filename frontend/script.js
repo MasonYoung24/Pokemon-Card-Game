@@ -136,9 +136,26 @@ document.getElementById("startButton").addEventListener("click", (e) => {
     })
     timer = setInterval(() => {
         milliseconds += 1000 / 100;
+        checkTimesUp();
         handleTime(milliseconds);
     }, 1000)
 })
+
+// check if the time is up depending on difficulty
+function checkTimesUp() {
+    if ((milliseconds == 20000) && (difficulty == "easy")) {
+        resetGame(timer);
+        alert("Times up! Better luck next time!");
+    }
+    else if ((milliseconds == 60000) && (difficulty == "medium")) {
+        resetGame(timer);
+        alert("Times up! Better luck next time!");
+    }
+    else if ((milliseconds == 120000) && (difficulty == "hard")) {
+        resetGame(timer);
+        alert("Times up! Better luck next time!");
+    }
+}
 
 let lightButton = document.getElementById("light");
 lightButton.addEventListener("click", () => {
@@ -200,32 +217,33 @@ function displayTimeAllowed(difficulty) {
     }
 }
 
+let restartButton = document.getElementById("restartButton");
+restartButton.addEventListener("click", () => {
+    resetGame(timer)
+})
+
 async function resetGame() {
-    let restartButton = document.getElementById("restartButton");
-    restartButton.addEventListener("click", () => {
-        // reset the game timer
-        clearInterval(timer);
-        timeDiv.innerText = `00:00:00`
-        milliseconds = 0; //reset the time to 0 milliseconds
-        timer = null; // reset timer activation check
+    // reset the game timer
+    clearInterval(timer);
+    timeDiv.innerText = `00:00:00`
+    milliseconds = 0; //reset the time to 0 milliseconds
+    timer = null; // reset timer activation check
 
-        // reset all game boards by removing them
-        cardGridEasy.style.display = "none";
-        cardGridHard.style.display = "none";
-        cardGridMedium.style.display = "none"
+    // reset all game boards by removing them
+    cardGridEasy.style.display = "none";
+    cardGridHard.style.display = "none";
+    cardGridMedium.style.display = "none"
 
-        // Reactivate the difficulty buttons
-        document.getElementById("easy").disabled = false;
-        document.getElementById("medium").disabled = false;
-        document.getElementById("hard").disabled = false;
+    // Reactivate the difficulty buttons
+    document.getElementById("easy").disabled = false;
+    document.getElementById("medium").disabled = false;
+    document.getElementById("hard").disabled = false;
 
-        let cards = document.querySelectorAll(".card");
-        cards.forEach((card) => {
-            card.style.pointerEvents = "none";
-        })
+    let cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+        card.style.pointerEvents = "none";
     })
 }
-resetGame(timer);
 
 // reveal all cards for a short time
 async function activatePowerUp() {
