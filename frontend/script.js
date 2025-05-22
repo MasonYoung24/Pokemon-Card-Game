@@ -194,6 +194,7 @@ async function handleGameDifficulty() {
     // medium
     mediumDifficultyBtn.addEventListener("click", async () => {
         totalPairs = 6;
+        numberOfCards = totalPairs * 2;
         pairsMatched = 0;
         pairsRemaining = totalPairs - pairsMatched
         // Populate pairs remaining on start
@@ -210,6 +211,7 @@ async function handleGameDifficulty() {
     })
     hardDifficultyBtn.addEventListener("click", async () => {
         totalPairs = 12;
+        numberOfCards = totalPairs * 2;
         pairsMatched = 0;
         pairsRemaining = totalPairs - pairsMatched
         // Populate pairs remaining on start
@@ -226,6 +228,7 @@ async function handleGameDifficulty() {
     })
     easyDifficultyBtn.addEventListener("click", async () => {
         totalPairs = 3;
+        numberOfCards = totalPairs * 2;
         pairsMatched = 0;
         pairsRemaining = totalPairs - pairsMatched
         // Populate pairs remaining on start
