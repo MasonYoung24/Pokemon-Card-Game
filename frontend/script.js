@@ -163,6 +163,44 @@ async function restartTimer() {
 }
 restartTimer(timer);
 
+async function handleGameDifficulty() {
+    let easyDifficultyBtn = document.getElementById("easy");
+    let mediumDifficultyBtn = document.getElementById("medium");
+    let hardDifficultyBtn = document.getElementById("hard");
+    let cardGridEasy = document.getElementById("card-grid-easy")
+    let cardGridMedium = document.getElementById("card-grid-medium")
+    let cardGridHard = document.getElementById("card-grid-hard")
+    // medium
+    mediumDifficultyBtn.addEventListener("click", () => {
+        let cards = document.querySelectorAll(".card");
+        cards.forEach((card) => {
+            card.style.flexBasis = "25%";
+        })
+        cardGridEasy.style.display = "none";
+        cardGridHard.style.display = "none";
+        cardGridMedium.style.display = "flex";
+    })
+    hardDifficultyBtn.addEventListener("click", () => {
+        let cards = document.querySelectorAll(".card");
+        cards.forEach((card) => {
+            card.style.flexBasis = "16.66%";
+        })
+        cardGridEasy.style.display = "none";
+        cardGridMedium.style.display = "none";
+        cardGridHard.style.display = "flex";
+    })
+    easyDifficultyBtn.addEventListener("click", () => {
+        let cards = document.querySelectorAll(".card");
+        cards.forEach((card) => {
+            card.style.flexBasis = "33%";
+        })
+        cardGridHard.style.display = "none";
+        cardGridMedium.style.display = "none";
+        cardGridEasy.style.display = "flex";
+    })
+}
+handleGameDifficulty();
+
 async function init() {
     await fetchPokemon();
     await addImagesToCardFronts();
