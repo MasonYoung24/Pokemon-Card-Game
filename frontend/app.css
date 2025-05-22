@@ -64,19 +64,6 @@ img {
     display: none;
 }
 
-.winAnimation {
-    animation-name: win;
-    animation-duration: 6s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-    z-index: 999;
-    pointer-events: none;
-    top: 0;
-    left: 0;
-    position: absolute;
-}
-
 #winMessageContainer {
     width: 90vw;
     max-width: 600px;
@@ -86,7 +73,7 @@ img {
     border: 5px solid #000;
     border-radius: 20px;
     padding: 2rem;
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -97,6 +84,7 @@ img {
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    display: none;
 }
 
 #winMessage {
@@ -135,6 +123,19 @@ img {
     color: #ee1515;
 }
 
+.winAnimation {
+    animation-name: win;
+    animation-duration: 6s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    z-index: 999;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
 @keyframes win {
     0% {
         transform: translate(-200%, 110vh) rotateZ(0deg);
@@ -170,5 +171,22 @@ img {
 
     100% {
         transform: translate(-200%, 110vh) rotateZ(0deg);
+    }
+}
+
+.winMessageAnimation {
+    animation-name: winMessageAnimation;
+    animation-duration: 5s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes winMessageAnimation {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(0);
     }
 }
