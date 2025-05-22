@@ -161,99 +161,107 @@ function handleTime(milliseconds) {
     timeDiv.innerText = `${hours}${minutes}:${seconds}${milliseconds}`
 }
 
-async function restartTimer() {
+async function resetGame() {
     let restartButton = document.getElementById("restartButton");
     restartButton.addEventListener("click", () => {
+        // reset the game timer
         clearInterval(timer);
         timeDiv.innerText = `00:00:00`
         milliseconds = 0; //reset the time to 0 milliseconds
         timer = null; // reset timer activation check
-    })
-}
-restartTimer(timer);
 
-// reveal all cards for a short time
-async function activatePowerUp() {
-    if (Math.random() < 0.3) {
-        alert("Power Up!! Catch 'em all!!");
-        let cards = document.querySelectorAll(".card");
-        cards.forEach((card) => {
-            card.classList.toggle("flip");
-            setTimeout(() => {
+        // reset all game boards by removing them
+        let cardGridEasy = document.getElementById("card-grid-easy")
+        let cardGridMedium = document.getElementById("card-grid-medium")
+        let cardGridHard = document.getElementById("card-grid-hard")
+        cardGridEasy.style.display = "none";
+        cardGridHard.style.display = "none";
+        cardGridMedium.style.display = "none"
+    })}
+resetGame(timer);
+
+    // reveal all cards for a short time
+    async function activatePowerUp() {
+        if (Math.random() < 0.3) {
+            alert("Power Up!! Catch 'em all!!");
+            let cards = document.querySelectorAll(".card");
+            cards.forEach((card) => {
                 card.classList.toggle("flip");
-            }, 1500)
+                setTimeout(() => {
+                    card.classList.toggle("flip");
+                }, 1500)
+            })
+        }
+    }
+
+    async function handleGameDifficulty() {
+        let easyDifficultyBtn = document.getElementById("easy");
+        let mediumDifficultyBtn = document.getElementById("medium");
+        let hardDifficultyBtn = document.getElementById("hard");
+        let cardGridEasy = document.getElementById("card-grid-easy")
+        let cardGridMedium = document.getElementById("card-grid-medium")
+        let cardGridHard = document.getElementById("card-grid-hard")
+        // medium
+        mediumDifficultyBtn.addEventListener("click", async () => {
+            totalPairs = 6;
+            numberOfCards = totalPairs * 2;
+            pairsMatched = 0;
+            pairsRemaining = totalPairs - pairsMatched
+            // Populate pairs remaining on start
+            document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
+            document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
+            let cards = document.querySelectorAll(".card");
+            cards.forEach((card) => {
+                card.style.flexBasis = "25%";
+            })
+            cardGridEasy.style.display = "none";
+            cardGridHard.style.display = "none";
+            cardGridMedium.style.display = "flex"
+            await addImagesToCardFronts(document.getElementById("card-grid-medium"));
+        })
+        hardDifficultyBtn.addEventListener("click", async () => {
+            totalPairs = 12;
+            numberOfCards = totalPairs * 2;
+            pairsMatched = 0;
+            pairsRemaining = totalPairs - pairsMatched
+            // Populate pairs remaining on start
+            document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
+            document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
+            let cards = document.querySelectorAll(".card");
+            cards.forEach((card) => {
+                card.style.flexBasis = "16.66%";
+            })
+            cardGridEasy.style.display = "none";
+            cardGridMedium.style.display = "none";
+            cardGridHard.style.display = "flex";
+            await addImagesToCardFronts(document.getElementById("card-grid-hard"));
+        })
+        easyDifficultyBtn.addEventListener("click", async () => {
+            totalPairs = 3;
+            numberOfCards = totalPairs * 2;
+            pairsMatched = 0;
+            pairsRemaining = totalPairs - pairsMatched
+            // Populate pairs remaining on start
+            document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
+            document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
+            let cards = document.querySelectorAll(".card");
+            cards.forEach((card) => {
+                card.style.flexBasis = "33%";
+            })
+            cardGridHard.style.display = "none";
+            cardGridMedium.style.display = "none";
+            cardGridEasy.style.display = "flex";
+            await addImagesToCardFronts(document.getElementById("card-grid-easy"));
         })
     }
-}
+    handleGameDifficulty();
 
-async function handleGameDifficulty() {
-    let easyDifficultyBtn = document.getElementById("easy");
-    let mediumDifficultyBtn = document.getElementById("medium");
-    let hardDifficultyBtn = document.getElementById("hard");
-    let cardGridEasy = document.getElementById("card-grid-easy")
-    let cardGridMedium = document.getElementById("card-grid-medium")
-    let cardGridHard = document.getElementById("card-grid-hard")
-    // medium
-    mediumDifficultyBtn.addEventListener("click", async () => {
-        totalPairs = 6;
-        numberOfCards = totalPairs * 2;
-        pairsMatched = 0;
-        pairsRemaining = totalPairs - pairsMatched
-        // Populate pairs remaining on start
-        document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
-        document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
-        let cards = document.querySelectorAll(".card");
-        cards.forEach((card) => {
-            card.style.flexBasis = "25%";
-        })
-        cardGridEasy.style.display = "none";
-        cardGridHard.style.display = "none";
-        cardGridMedium.style.display = "flex"
-        await addImagesToCardFronts(document.getElementById("card-grid-medium"));
-    })
-    hardDifficultyBtn.addEventListener("click", async () => {
-        totalPairs = 12;
-        numberOfCards = totalPairs * 2;
-        pairsMatched = 0;
-        pairsRemaining = totalPairs - pairsMatched
-        // Populate pairs remaining on start
-        document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
-        document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
-        let cards = document.querySelectorAll(".card");
-        cards.forEach((card) => {
-            card.style.flexBasis = "16.66%";
-        })
-        cardGridEasy.style.display = "none";
-        cardGridMedium.style.display = "none";
-        cardGridHard.style.display = "flex";
-        await addImagesToCardFronts(document.getElementById("card-grid-hard"));
-    })
-    easyDifficultyBtn.addEventListener("click", async () => {
-        totalPairs = 3;
-        numberOfCards = totalPairs * 2;
-        pairsMatched = 0;
-        pairsRemaining = totalPairs - pairsMatched
-        // Populate pairs remaining on start
-        document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
-        document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
-        let cards = document.querySelectorAll(".card");
-        cards.forEach((card) => {
-            card.style.flexBasis = "33%";
-        })
-        cardGridHard.style.display = "none";
-        cardGridMedium.style.display = "none";
-        cardGridEasy.style.display = "flex";
+    async function init() {
+        await fetchPokemon();
         await addImagesToCardFronts(document.getElementById("card-grid-easy"));
-    })
-}
-handleGameDifficulty();
+    }
 
-async function init() {
-    await fetchPokemon();
-    await addImagesToCardFronts(document.getElementById("card-grid-easy"));
-}
-
-init();
+    init();
 
 
 
