@@ -129,6 +129,11 @@ document.getElementById("startButton").addEventListener("click", (e) => {
     document.getElementById("easy").disabled = true;
     document.getElementById("medium").disabled = true;
     document.getElementById("hard").disabled = true;
+
+    let cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+        card.style.pointerEvents = "auto";
+    })
     timer = setInterval(() => {
         milliseconds += 1000 / 100;
         handleTime(milliseconds);
@@ -202,6 +207,11 @@ async function resetGame() {
         document.getElementById("easy").disabled = false;
         document.getElementById("medium").disabled = false;
         document.getElementById("hard").disabled = false;
+
+        let cards = document.querySelectorAll(".card");
+        cards.forEach((card) => {
+            card.style.pointerEvents = "none";
+        })
     })
 }
 resetGame(timer);
