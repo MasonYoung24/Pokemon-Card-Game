@@ -57,3 +57,118 @@ img {
     transform: rotateY(180deg);
     backface-visibility: hidden;
 }
+
+#win {
+    width: 500px;
+    position: absolute;
+    display: none;
+}
+
+.winAnimation {
+    animation-name: win;
+    animation-duration: 6s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    z-index: 999;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+#winMessageContainer {
+    width: 90vw;
+    max-width: 600px;
+    height: auto;
+    max-height: 80vh;
+    background-color: white;
+    border: 5px solid #000;
+    border-radius: 20px;
+    padding: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#winMessage {
+    font-family: 'Pokemon Solid', sans-serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    color: #ee1515;
+    text-align: center;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000,
+        -3px 0px 0 #000,
+        3px 0px 0 #000,
+        0px -3px 0 #000,
+        0px 3px 0 #000;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    z-index: 2000;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+#closeButton:hover {
+    transform: scale(1.2);
+    color: #ee1515;
+}
+
+@keyframes win {
+    0% {
+        transform: translate(-200%, 110vh) rotateZ(0deg);
+    }
+
+    12.5% {
+        transform: translate(120vw, -120%) rotateZ(20deg);
+    }
+
+    25% {
+        transform: translate(-200%, 50vh) rotateZ(-20deg);
+    }
+
+    35% {
+        transform: translate(-200%, -120%) rotateZ(-40deg);
+    }
+
+    50% {
+        transform: translate(20vw, 100vh) rotateZ(0deg)
+    }
+
+    62.5% {
+        transform: translate(20vw, 100vh) rotateZ(20deg)
+    }
+
+    75% {
+        transform: translate(100%, 50vh) rotateZ(20deg)
+    }
+
+    87.5% {
+        transform: translate(50vw, -200%) rotateZ(20deg)
+    }
+
+    100% {
+        transform: translate(-200%, 110vh) rotateZ(0deg);
+    }
+}
