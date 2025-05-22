@@ -150,8 +150,18 @@ async function pauseTimer() {
         pauseButton.classList.add("on");
     })
 }
-
 pauseTimer();
+
+async function restartTimer() {
+    let restartButton = document.getElementById("restartButton");
+    restartButton.addEventListener("click", () => {
+        clearInterval(timer);
+        timeDiv.innerText = `00:00:00`
+        milliseconds = 0; //reset the time to 0 milliseconds
+        timer = null; // reset timer activation check
+    })
+}
+restartTimer(timer);
 
 async function init() {
     await fetchPokemon();
