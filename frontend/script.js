@@ -88,7 +88,7 @@ const onCardClick = async function (e) {
                     pairsRemaining = totalPairs - pairsMatched;
                     if (pairsRemaining == 0) {
                         playWinningAnimation();
-                        resetGame();
+                        resetGame(timer, difficulty);
                     }
                     // Update pairs remaining
                     document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
@@ -146,15 +146,15 @@ document.getElementById("startButton").addEventListener("click", (e) => {
 // check if the time is up depending on difficulty
 function checkTimesUp(timeMilliseconds) {
     if ((timeMilliseconds == 20000) && (difficulty == "easy")) {
-        resetGame(timer);
+        resetGame(timer, difficulty);
         alert("Times up! Better luck next time!");
     }
     else if ((timeMilliseconds == 60000) && (difficulty == "medium")) {
-        resetGame(timer);
+        resetGame(timer, difficulty);
         alert("Times up! Better luck next time!");
     }
     else if ((timeMilliseconds == 120000) && (difficulty == "hard")) {
-        resetGame(timer);
+        resetGame(timer, difficulty);
         alert("Times up! Better luck next time!");
     }
 }
@@ -236,10 +236,10 @@ function displayTimeAllowed(difficulty) {
 
 let restartButton = document.getElementById("restartButton");
 restartButton.addEventListener("click", () => {
-    resetGame(timer)
+    resetGame(timer, difficulty)
 })
 
-async function resetGame() {
+async function resetGame(timer, difficulty) {
     // reset the game timer
     clearInterval(timer);
     timeDiv.innerText = `00:00:00`
@@ -256,9 +256,12 @@ async function resetGame() {
     document.getElementById("medium").disabled = false;
     document.getElementById("hard").disabled = false;
 
-    let cards = document.querySelectorAll(".card");
+    let grid = document.getElementById(`card-grid-${difficulty}`)
+
+    let cards = grid.querySelectorAll(".card");
     cards.forEach((card) => {
         card.style.pointerEvents = "none";
+        card.classList.toggle("flip");
     })
 }
 
