@@ -83,9 +83,8 @@ const onCardClick = async function (e) {
                     document.getElementById("pairsMatched").innerText = `Pairs Matched: ${pairsMatched}`
                     // Add number of remaining pairs to the header
                     pairsRemaining = totalPairs - pairsMatched;
-                    if (pairsRemaining = 0) {
-                        let winAnimationElement = document.getElementById("win")
-                        winAnimationElement.classList.add("winAnimation");
+                    if (pairsRemaining == 0) {
+                        playWinningAnimation();
                     }
                     // Update pairs remaining
                     document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
@@ -131,6 +130,16 @@ document.getElementById("startButton").addEventListener("click", (e) => {
         }
     }, 1000)
 })
+
+function playWinningAnimation() {
+    let winAnimationElement = document.getElementById("win")
+    winAnimationElement.style.display = "block"
+    winAnimationElement.classList.add("winAnimation");
+    winAnimationElement.addEventListener("animationend", ()=> {
+        winAnimationElement.style.display = "none";
+        winAnimationElement.classList.remove("winAnimation")
+    });
+}
 
 function handleTime(milliseconds) {
     let timeDiv = document.getElementById("time");
