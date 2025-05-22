@@ -8,7 +8,7 @@
 
 @media only screen and (min-width: 768px) {
     #card-grid-easy {
-        display: flex;
+        display: none;
         flex-wrap: wrap;
         width: 600px;
         height: 400px;
@@ -108,7 +108,7 @@ img {
     border: 5px solid #000;
     border-radius: 20px;
     padding: 2rem;
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -219,7 +219,7 @@ img {
 
 @keyframes winMessageAnimation {
     0% {
-        transform: translateY(-100vh);
+        transform: translateY(-50vh);
     }
 
     100% {
