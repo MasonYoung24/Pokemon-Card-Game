@@ -2,13 +2,31 @@
     perspective: 1000px;
 }
 
-#card-grid {
+#card-grid-easy {
     display: flex;
     flex-wrap: wrap;
     width: 600px;
     height: 400px;
     margin: auto;
     border: 1px;
+}
+
+#card-grid-medium {
+    flex-wrap: wrap;
+    width: 800px;
+    height: 400px;
+    margin: auto;
+    border: 1px;
+    display: none;
+}
+
+#card-grid-hard {
+    flex-wrap: wrap;
+    width: 1000px;
+    height: 400px;
+    margin: auto;
+    border: 1px;
+    display: none;
 }
 
 img {
