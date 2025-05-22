@@ -12,7 +12,7 @@ let minutes = 0
 let hours = 0;
 let timeDiv = document.getElementById("time");
 let gameActive = false;
-
+let difficulty;
 let cardGridEasy = document.getElementById("card-grid-easy")
 let cardGridMedium = document.getElementById("card-grid-medium")
 let cardGridHard = document.getElementById("card-grid-hard")
@@ -135,23 +135,24 @@ document.getElementById("startButton").addEventListener("click", (e) => {
         card.style.pointerEvents = "auto";
     })
     timer = setInterval(() => {
-        milliseconds += 1000 / 100;
-        checkTimesUp();
+        milliseconds += 1000;
+        console.log(milliseconds)
+        checkTimesUp(milliseconds);
         handleTime(milliseconds);
     }, 1000)
 })
 
 // check if the time is up depending on difficulty
-function checkTimesUp() {
-    if ((milliseconds == 20000) && (difficulty == "easy")) {
+function checkTimesUp(timeMilliseconds) {
+    if ((timeMilliseconds == 20000) && (difficulty == "easy")) {
         resetGame(timer);
         alert("Times up! Better luck next time!");
     }
-    else if ((milliseconds == 60000) && (difficulty == "medium")) {
+    else if ((timeMilliseconds == 60000) && (difficulty == "medium")) {
         resetGame(timer);
         alert("Times up! Better luck next time!");
     }
-    else if ((milliseconds == 120000) && (difficulty == "hard")) {
+    else if ((timeMilliseconds == 120000) && (difficulty == "hard")) {
         resetGame(timer);
         alert("Times up! Better luck next time!");
     }
@@ -191,10 +192,7 @@ function playWinningAnimation() {
 
 function handleTime(milliseconds) {
     let timeDiv = document.getElementById("time");
-    if (milliseconds == 1000) {
-        milliseconds = 0;
-        seconds++;
-    }
+    seconds = milliseconds / 1000;
     if (seconds == 60) {
         seconds = 0;
         minutes++;
@@ -203,7 +201,7 @@ function handleTime(milliseconds) {
         minutes = 0;
         hours++;
     }
-    timeDiv.innerText = `${hours}${minutes}:${seconds}${milliseconds}`
+    timeDiv.innerText = `${hours}:${minutes}:${seconds}`
 }
 
 let timeMessageDiv = document.getElementById("timeMessage");
@@ -265,6 +263,7 @@ async function handleGameDifficulty() {
     let hardDifficultyBtn = document.getElementById("hard");
     // medium
     mediumDifficultyBtn.addEventListener("click", async () => {
+        difficulty = "medium";
         totalPairs = 6;
         numberOfCards = totalPairs * 2;
         pairsMatched = 0;
@@ -283,6 +282,7 @@ async function handleGameDifficulty() {
         await addImagesToCardFronts(document.getElementById("card-grid-medium"));
     })
     hardDifficultyBtn.addEventListener("click", async () => {
+        difficulty = "hard";
         totalPairs = 12;
         numberOfCards = totalPairs * 2;
         pairsMatched = 0;
@@ -301,6 +301,7 @@ async function handleGameDifficulty() {
         await addImagesToCardFronts(document.getElementById("card-grid-hard"));
     })
     easyDifficultyBtn.addEventListener("click", async () => {
+        difficulty = "easy";
         totalPairs = 3;
         numberOfCards = totalPairs * 2;
         pairsMatched = 0;
