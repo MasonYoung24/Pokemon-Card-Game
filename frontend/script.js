@@ -189,6 +189,17 @@ function handleTime(milliseconds) {
     timeDiv.innerText = `${hours}${minutes}:${seconds}${milliseconds}`
 }
 
+let timeMessageDiv = document.getElementById("timeMessage");
+function displayTimeAllowed(difficulty) {
+    if (difficulty == "easy") {
+        timeMessageDiv.innerText = "You have 20 seconds!"
+    } else if (difficulty == "medium") {
+        timeMessageDiv.innerText = "You have 1 minute!"
+    } else if (difficulty == "hard") {
+        timeMessageDiv.innerText = "You have 2 minutes!"
+    }
+}
+
 async function resetGame() {
     let restartButton = document.getElementById("restartButton");
     restartButton.addEventListener("click", () => {
@@ -250,6 +261,7 @@ async function handleGameDifficulty() {
         cardGridEasy.style.display = "none";
         cardGridHard.style.display = "none";
         cardGridMedium.style.display = "flex"
+        displayTimeAllowed("medium");
         await addImagesToCardFronts(document.getElementById("card-grid-medium"));
     })
     hardDifficultyBtn.addEventListener("click", async () => {
@@ -267,6 +279,7 @@ async function handleGameDifficulty() {
         cardGridEasy.style.display = "none";
         cardGridMedium.style.display = "none";
         cardGridHard.style.display = "flex";
+        displayTimeAllowed("hard");
         await addImagesToCardFronts(document.getElementById("card-grid-hard"));
     })
     easyDifficultyBtn.addEventListener("click", async () => {
@@ -284,6 +297,7 @@ async function handleGameDifficulty() {
         cardGridHard.style.display = "none";
         cardGridMedium.style.display = "none";
         cardGridEasy.style.display = "flex";
+        displayTimeAllowed("easy");
         await addImagesToCardFronts(document.getElementById("card-grid-easy"));
     })
 }
