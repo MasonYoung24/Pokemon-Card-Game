@@ -88,6 +88,7 @@ const onCardClick = async function (e) {
                     pairsRemaining = totalPairs - pairsMatched;
                     if (pairsRemaining == 0) {
                         playWinningAnimation();
+                        resetGame();
                     }
                     // Update pairs remaining
                     document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
