@@ -1,6 +1,6 @@
 let allPokemon = [];
 let flippedPokemon;
-let numberOfCards = Array.from(document.querySelectorAll(".card")).length;
+let numberOfCards = 6;
 let totalPairs = numberOfCards / 2;
 let pairsMatched = 0;
 let pairsRemaining = totalPairs - pairsMatched;
@@ -31,8 +31,8 @@ function getRandomElement(arr) {
     return arr[randomIndex];
 }
 
-async function addImagesToCardFronts() {
-    let cardFronts = Array.from(document.querySelectorAll(".cardFront"));
+async function addImagesToCardFronts(container) {
+    let cardFronts = Array.from(container.querySelectorAll(".cardFront"));
     // shuffle the cardBacks
     cardFronts.sort(() => Math.random() - 0.5);
     for (let i = 0; i < numberOfCards; i += 2) {
@@ -175,16 +175,29 @@ async function handleGameDifficulty() {
     let cardGridMedium = document.getElementById("card-grid-medium")
     let cardGridHard = document.getElementById("card-grid-hard")
     // medium
-    mediumDifficultyBtn.addEventListener("click", () => {
+    mediumDifficultyBtn.addEventListener("click", async () => {
+        totalPairs = 6;
+        pairsMatched = 0;
+        pairsRemaining = totalPairs - pairsMatched
+        // Populate pairs remaining on start
+        document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
+        document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
         let cards = document.querySelectorAll(".card");
         cards.forEach((card) => {
             card.style.flexBasis = "25%";
         })
         cardGridEasy.style.display = "none";
         cardGridHard.style.display = "none";
-        cardGridMedium.style.display = "flex";
+        cardGridMedium.style.display = "flex"
+        await addImagesToCardFronts(document.getElementById("card-grid-medium"));
     })
-    hardDifficultyBtn.addEventListener("click", () => {
+    hardDifficultyBtn.addEventListener("click", async () => {
+        totalPairs = 12;
+        pairsMatched = 0;
+        pairsRemaining = totalPairs - pairsMatched
+        // Populate pairs remaining on start
+        document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
+        document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
         let cards = document.querySelectorAll(".card");
         cards.forEach((card) => {
             card.style.flexBasis = "16.66%";
@@ -192,8 +205,15 @@ async function handleGameDifficulty() {
         cardGridEasy.style.display = "none";
         cardGridMedium.style.display = "none";
         cardGridHard.style.display = "flex";
+        await addImagesToCardFronts(document.getElementById("card-grid-hard"));
     })
-    easyDifficultyBtn.addEventListener("click", () => {
+    easyDifficultyBtn.addEventListener("click", async () => {
+        totalPairs = 3;
+        pairsMatched = 0;
+        pairsRemaining = totalPairs - pairsMatched
+        // Populate pairs remaining on start
+        document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
+        document.getElementById("pairsTotal").innerText = `Total Pairs: ${totalPairs}`;
         let cards = document.querySelectorAll(".card");
         cards.forEach((card) => {
             card.style.flexBasis = "33%";
@@ -201,13 +221,14 @@ async function handleGameDifficulty() {
         cardGridHard.style.display = "none";
         cardGridMedium.style.display = "none";
         cardGridEasy.style.display = "flex";
+        await addImagesToCardFronts(document.getElementById("card-grid-easy"));
     })
 }
 handleGameDifficulty();
 
 async function init() {
     await fetchPokemon();
-    await addImagesToCardFronts();
+    await addImagesToCardFronts(document.getElementById("card-grid-easy"));
 }
 
 init();
