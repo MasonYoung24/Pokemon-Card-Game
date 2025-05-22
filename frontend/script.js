@@ -132,12 +132,20 @@ document.getElementById("startButton").addEventListener("click", (e) => {
 })
 
 function playWinningAnimation() {
-    let winAnimationElement = document.getElementById("win")
+    let winAnimationElement = document.getElementById("win");
+    let winMessageContainer = document.getElementById("winMessageContainer");
     winAnimationElement.style.display = "block"
     winAnimationElement.classList.add("winAnimation");
-    winAnimationElement.addEventListener("animationend", ()=> {
+    winAnimationElement.addEventListener("animationend", () => {
         winAnimationElement.style.display = "none";
-        winAnimationElement.classList.remove("winAnimation")
+        winAnimationElement.classList.remove("winAnimation");
+        winMessageContainer.style.display = "block";
+        winMessageContainer.classList.add("winMessageAnimation");
+        winMessageContainer.addEventListener("animationend", () => {
+            setTimeout(() => {
+                winMessageContainer.style.display = "none";
+            }, 3000)
+        })
     });
 }
 
