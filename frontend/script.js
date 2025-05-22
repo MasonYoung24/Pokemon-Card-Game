@@ -163,6 +163,8 @@ lightButton.addEventListener("click", () => {
     cardGridEasy.style.backgroundColor = "white";
     cardGridMedium.style.backgroundColor = "white";
     cardGridHard.style.backgroundColor = "white";
+    //save theme to local storage
+    localStorage.setItem("theme", "light");
 })
 
 let darkButton = document.getElementById("dark");
@@ -170,6 +172,8 @@ darkButton.addEventListener("click", () => {
     cardGridEasy.style.backgroundColor = "black";
     cardGridMedium.style.backgroundColor = "black";
     cardGridHard.style.backgroundColor = "black";
+    //save theme to local storage
+    localStorage.setItem("theme", "dark");
 })
 
 function playWinningAnimation() {
