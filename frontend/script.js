@@ -38,12 +38,18 @@ async function addImagesToCardFronts(container) {
     let cardFronts = Array.from(container.querySelectorAll(".cardFront"));
     // shuffle the cardBacks
     cardFronts.sort(() => Math.random() - 0.5);
+    let pokemonRetrieved = [];
     for (let i = 0; i < numberOfCards; i += 2) {
         let randomPokemon = getRandomElement(allPokemon);
-        let response = await axios.get(randomPokemon.url);
-        cardFronts[i].src = response.data.sprites.other["official-artwork"].front_default
-        cardFronts[i + 1].src = response.data.sprites.other["official-artwork"].front_default
+        if (!pokemonRetrieved.includes(randomPokemon)){
+            console.log(`Pokemon added: ${randomPokemon}`)
+            pokemonRetrieved.push(randomPokemon);
+            let response = await axios.get(randomPokemon.url);
+            cardFronts[i].src = response.data.sprites.other["official-artwork"].front_default
+            cardFronts[i + 1].src = response.data.sprites.other["official-artwork"].front_default
+        }
     }
+    return;
 }
 
 let firstCardImg = undefined;
