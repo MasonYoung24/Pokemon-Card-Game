@@ -83,6 +83,10 @@ const onCardClick = async function (e) {
                     document.getElementById("pairsMatched").innerText = `Pairs Matched: ${pairsMatched}`
                     // Add number of remaining pairs to the header
                     pairsRemaining = totalPairs - pairsMatched;
+                    if (pairsRemaining = 0) {
+                        let winAnimationElement = document.getElementById("win")
+                        winAnimationElement.classList.add("winAnimation");
+                    }
                     // Update pairs remaining
                     document.getElementById("pairsRemaining").innerText = `Pairs Remaining: ${pairsRemaining}`;
                     firstCardImg.parentNode.removeEventListener("click", onCardClick);
